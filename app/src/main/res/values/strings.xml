@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">mobileAppDevA</string>
+    <string name="text">Nagashige</string>
+    <string name="name">Shunya</string>
+    <string name="changeButton">change</string>
+    <string name="saveButton">save</string>
 </resources>
