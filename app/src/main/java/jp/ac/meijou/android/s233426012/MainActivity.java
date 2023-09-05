@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.widget.TextView;
 
 import jp.ac.meijou.android.s233426012.databinding.ActivityMainBinding;
@@ -19,8 +20,8 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         dataStore = PrefDataStore.getInstance(getApplicationContext());
-        dataStore.getString("name")
-                .ifPresent(name -> binding.text.setText(name));
+//        dataStore.getString("name")
+//                .ifPresent(name -> binding.text.setText(name));
 
 
         binding.changeButton.setOnClickListener(view ->{
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         binding.saveButton.setOnClickListener(view -> {
             var text = binding.editTextText.getText().toString();
             dataStore.setString("name", text);
+            Log.d("murayama","save: "+text);
         });
 
         binding.editTextText.addTextChangedListener(new TextWatcher() {
@@ -50,5 +52,12 @@ public class MainActivity extends AppCompatActivity {
 //                binding.text.setText(editable.toString());
             }
         });
+    }
+
+    @Override
+    protected void onStart(){
+        super.onStart();
+        dataStore.getString("name")
+                .ifPresent(name -> binding.text.setText(name));
     }
 }
